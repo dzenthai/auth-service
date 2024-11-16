@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: security-service
+
+  jwt:
+    key: ${SECRET_KEY}
+    lifetime: ${LIFETIME}
