@@ -1,4 +1,4 @@
-package com.dzenthai.securityservice;
+package com.dzenthai.security_service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
