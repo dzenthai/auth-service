@@ -70,7 +70,7 @@ public class SecurityConfig {
                     registry.requestMatchers
                             ("/api/auth").permitAll();
                     registry.requestMatchers("/api/user").hasRole("USER");
-                    registry.requestMatchers("/api/admin").hasRole("ADMIN");
+                    registry.requestMatchers("/api/**").hasRole("ADMIN");
                     registry.anyRequest().authenticated();
                 })
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
