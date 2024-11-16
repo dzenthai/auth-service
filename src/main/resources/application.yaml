@@ -5,3 +5,4 @@ spring:
   jwt:
     key: ${SECRET_KEY}
     lifetime: ${LIFETIME}
+
