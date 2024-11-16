@@ -26,7 +26,10 @@ public class JwtService {
     @Value("${spring.jwt.lifetime}")
     private int lifetime;
 
-    public JwtService(@Value("${spring.jwt.key}") String secretKeyString, ObjectMapper objectMapper) {
+    public JwtService(
+            @Value("${spring.jwt.key}") String secretKeyString,
+            ObjectMapper objectMapper
+    ) {
         this.secretKey = Keys.hmacShaKeyFor(Base64.getDecoder().decode(secretKeyString));
         this.objectMapper = objectMapper;
     }

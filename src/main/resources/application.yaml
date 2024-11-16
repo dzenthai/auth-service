@@ -6,3 +6,10 @@ spring:
     key: ${SECRET_KEY}
     lifetime: ${LIFETIME}
 
+  datasource:
+    username: root
+    password: 1234
+    url: jdbc:postgresql://localhost:5432/security_db
+
+  liquibase:
+    change-log: classpath*:/db.changelog/master.yaml

@@ -1,0 +1,53 @@
+databaseChangeLog:
+  - preConditions:
+      - runningAs:
+          username: root
+  - changeSet:
+      id: 2
+      author: dzenthai
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: "dzenthai"
+              - column:
+                  name: password
+                  value: "$2a$10$u63c/1/ccJzQ8YixRr0cPO12xSGjjtCoinlX4aK4CJVBu7NAj9JjK"
+              - column:
+                  name: email
+                  value: "dzenthai@example.com"
+              - column:
+                  name: role
+                  value: "ROLE_ADMIN"
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: "alice"
+              - column:
+                  name: password
+                  value: "$2a$10$UVuQgPNiQ/9be9l/KrE6Hu3IHj3T3u2F.RlArpcu8oAoet7C1sfFi"
+              - column:
+                  name: email
+                  value: "alice@example.com"
+              - column:
+                  name: role
+                  value: "ROLE_USER"
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: "bob"
+              - column:
+                  name: password
+                  value: "$2a$10$0gIiwxRdAGw4gjLVEihBwOxCST8lRE7QX1irMqZ2OIbcfjkXwe0AC"
+              - column:
+                  name: email
+                  value: "bob@example.com"
+              - column:
+                  name: role
+                  value: "ROLE_USER"

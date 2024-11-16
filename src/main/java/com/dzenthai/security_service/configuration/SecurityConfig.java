@@ -27,7 +27,10 @@ public class SecurityConfig {
 
     private final JwtFilter jwtFilter;
 
-    public SecurityConfig(UserService userService, JwtFilter jwtFilter) {
+    public SecurityConfig(
+            UserService userService,
+            JwtFilter jwtFilter
+    ) {
         this.userService = userService;
         this.jwtFilter = jwtFilter;
     }
@@ -45,7 +48,7 @@ public class SecurityConfig {
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userService);
+        provider.setUserDetailsService(userDetailsService());
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
@@ -65,7 +68,7 @@ public class SecurityConfig {
                 )
                 .authorizeHttpRequests(registry -> {
                     registry.requestMatchers
-                            ("/api/auth/**").permitAll();
+                            ("/api/auth").permitAll();
                     registry.requestMatchers("/api/user").hasRole("USER");
                     registry.requestMatchers("/api/admin").hasRole("ADMIN");
                     registry.anyRequest().authenticated();

@@ -3,6 +3,7 @@ package com.dzenthai.security_service.service;
 import com.dzenthai.security_service.dto.UserDTO;
 import com.dzenthai.security_service.entity.User;
 import com.dzenthai.security_service.repository.UserRepo;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,7 +22,11 @@ public class UserService implements UserDetailsService {
 
     private final PasswordEncoder encoder;
 
-    public UserService(UserRepo userRepo, JwtService jwtService, PasswordEncoder encoder) {
+    public UserService(
+            UserRepo userRepo,
+            JwtService jwtService,
+            @Lazy PasswordEncoder encoder
+    ) {
         this.userRepo = userRepo;
         this.jwtService = jwtService;
         this.encoder = encoder;
