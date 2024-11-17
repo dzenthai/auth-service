@@ -2,6 +2,7 @@ services:
   postgres:
     container_name: security_postgres
     image: postgres:latest
+    restart: on-failure
     environment:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=1234
@@ -11,5 +12,26 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
 
+  application:
+    container_name: auth-service
+    depends_on:
+      - postgres
+    build: .
+    restart: on-failure
+    env_file: ./.env
+    environment:
+      SPRING_APPLICATION_JSON: '{
+        "spring.datasource.username": "root",
+        "spring.datasource.password": "1234",
+        "spring.datasource.url": "jdbc:postgresql://postgres:5432/security_db",
+        "liquibase.change-log": "classpath:/db.changelog/master.yaml"
+      }'
+    ports:
+      - '8080:8080'
+    volumes:
+      - ~/.gradle:/home/gradle/.gradle
+
 volumes:
   postgres:
+  auth-service:
+
