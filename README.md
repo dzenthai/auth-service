@@ -96,7 +96,7 @@ This service is modular, flexible, and ready to integrate with other services in
 - Custom exceptions for bad credentials and unknown users.
 - Expired or invalid tokens trigger appropriate HTTP errors.
 
-  <img src="./assets/Exception-example.png" alt="">
+<img src="./assets/Exception-example.png" alt="">
 
 ---
 
