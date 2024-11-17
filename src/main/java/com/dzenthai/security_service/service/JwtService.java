@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 
+@Slf4j
 @Service
 public class JwtService {
 
@@ -35,6 +37,7 @@ public class JwtService {
     }
 
     public String generateToken(User user) {
+        log.info("JwtService | Generating JWT token for user: {}", user.getUsername());
         Map<String, Object> claims = new HashMap<>();
         List<String> rolesList = user.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
@@ -51,10 +54,12 @@ public class JwtService {
     }
 
     public String extractUsernameFromToken(String token) {
+        log.info("JwtService | Extracting username from token: {}", token);
         return getClaims(token).getSubject();
     }
 
     public List<String> extractRoleFromToken(String token) {
+        log.info("JwtService | Extracting role from token: {}", token);
         Claims claims = getClaims(token);
         Object roles = claims.get("roles");
         if (roles == null) {
@@ -68,6 +73,7 @@ public class JwtService {
     }
 
     private Claims getClaims(String token) {
+        log.info("JwtService | Extracting claims from token: {}", token);
         return Jwts.parser()
                 .verifyWith(secretKey)
                 .build()

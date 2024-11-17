@@ -2,10 +2,9 @@ package com.dzenthai.security_service.controller;
 
 import com.dzenthai.security_service.dto.UserDTO;
 import com.dzenthai.security_service.service.UserService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -19,7 +18,7 @@ public class AuthController {
     }
 
     @PostMapping
-    public String authUser(@RequestBody UserDTO userDTO) {
-        return userService.authUser(userDTO);
+    public ResponseEntity<String> authUser(@RequestBody UserDTO userDTO) {
+        return new ResponseEntity<>(userService.authUser(userDTO), HttpStatus.OK);
     }
 }
